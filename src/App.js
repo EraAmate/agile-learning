@@ -1,7 +1,8 @@
 import React from 'react';
+import CountdownTimer from './countdownTimer/pages/CountdownTimer';
 
 function App() {
-  return <div></div>;
+  return <CountdownTimer />;
 }
 
 export default App;
