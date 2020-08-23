@@ -6,11 +6,14 @@ import { InputsBox, TextInput, DateInput, Div } from '../components/Input';
 import { TimerWrapper } from '../components/TimerWrapper';
 
 export default function CountdownTimer() {
-  const date = 'December 31, 2020';
-  const [event, setEvent] = useState('');
-  const [eventDate, setEventDate] = useState(date);
+  const [inputText, setInputText] = useState('');
+  const [text, setText] = useState('New Year');
+  const [eventDate, setEventDate] = useState('December 31, 2020');
+  const [inputDate, setInputDate] = useState();
+
   const clickOnStartButton = () => {
-    setEventDate();
+    setEventDate(inputDate);
+    setText(inputText);
   };
 
   return (
@@ -21,16 +24,20 @@ export default function CountdownTimer() {
           <TextInput
             placeholder={'Write down event name'}
             type="text"
-            value={event}
-            onChange={(event) => setEvent(event.target.value)}
+            value={inputText}
+            onChange={(event) => setInputText(event.target.value)}
           />
-          <DateInput type="date" />
+          <DateInput
+            type="date"
+            value={inputDate}
+            onChange={(event) => setInputDate(event.target.value)}
+          />
           <Button onClick={clickOnStartButton}>Start</Button>
         </Div>
       </InputsBox>
 
       <TimerWrapper>
-        <p>{event}</p> {/* eventName??? */}
+        <p>{text}</p> {/* eventName??? */}
         <DateCountdown dateTo={eventDate} />
       </TimerWrapper>
     </Main>

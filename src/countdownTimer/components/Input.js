@@ -2,7 +2,8 @@ import styled from '@emotion/styled';
 
 export const InputsBox = styled.div`
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-around;
   padding: 50px 0 20px;
 `;
 
@@ -22,6 +23,7 @@ export const DateInput = styled.input`
   border-radius: 0 7px 7px 0;
   font-size: 1rem;
   width: 40%;
+  border-left: 1px solid black;
 `;
 
 export const Div = styled.div`
