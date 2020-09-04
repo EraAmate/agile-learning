@@ -1,26 +1,61 @@
 import React, { useState } from 'react';
 import { Main } from '../components/Main';
-import DateCountdown from 'react-date-countdown-timer';
-import { Button } from '../components/Button';
-import { InputsBox, TextInput, DateInput, Div } from '../components/Input';
+import StartButton from '../components/Button';
 import { TimerWrapper } from '../components/TimerWrapper';
+import { DateBox, Box, InputsBox } from '../components/boxes';
+import { TextInput, DateInput } from '../components/Input';
 
 export default function CountdownTimer() {
   const [inputText, setInputText] = useState('');
-  const [text, setText] = useState('New Year');
-  const [eventDate, setEventDate] = useState('December 31, 2020');
-  const [inputDate, setInputDate] = useState();
+  const [text, setText] = useState('No  name');
+  const [dateString, setDateString] = useState('0m 0d 0h 0m 0s');
+  const [eventDate, setEventDate] = useState(new Date());
 
   const clickOnStartButton = () => {
-    setEventDate(inputDate);
     setText(inputText);
+    if (!eventDate) {
+      alert('please input a date');
+    } else {
+      startCountdown();
+    }
+  };
+
+  const startCountdown = () => {
+    var countdownInterval = setInterval(function () {
+      var now = new Date().getTime();
+      console.log(now);
+      var difference = new Date(eventDate).getTime() - now;
+      console.log(eventDate);
+      let days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      let month = Math.floor(days / 30);
+      let hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+      let minutes = Math.floor((difference / 1000 / 60) % 60);
+      let seconds = Math.floor((difference / 1000) % 60);
+
+      let showDate =
+        month +
+        'm ' +
+        days +
+        'd ' +
+        hours +
+        'h ' +
+        minutes +
+        'm ' +
+        seconds +
+        's ';
+
+      setDateString(showDate);
+      if (difference < 0) {
+        clearInterval(countdownInterval);
+      }
+    }, 1000);
   };
 
   return (
     <Main>
       <h2>Countdown Timer</h2>
       <InputsBox>
-        <Div>
+        <Box>
           <TextInput
             placeholder={'Write down event name'}
             type="text"
@@ -29,17 +64,17 @@ export default function CountdownTimer() {
           />
           <DateInput
             type="date"
-            value={inputDate}
-            onChange={(event) => setInputDate(event.target.value)}
+            value={eventDate}
+            onChange={(event) => setEventDate(event.target.value)}
           />
-          <Button onClick={clickOnStartButton}>Start</Button>
-        </Div>
+          <StartButton name="Start" onClick={clickOnStartButton} />
+        </Box>
       </InputsBox>
 
       <TimerWrapper>
-        <p>{text}</p> {/* eventName??? */}
-        <DateCountdown dateTo={eventDate} />
+        <p>{text}</p>
       </TimerWrapper>
+      <DateBox>{dateString}</DateBox>
     </Main>
   );
 }
