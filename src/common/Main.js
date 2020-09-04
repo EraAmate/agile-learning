@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import grey from '../assets/grey.jpg';
+import grey from './assets/grey.jpg';
 
 export const Main = styled.div`
   height: 100vh;
