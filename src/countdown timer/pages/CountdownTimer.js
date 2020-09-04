@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Main } from '../components/Main';
+import { Main } from '../../common/Main';
 import StartButton from '../components/Button';
 import { TimerWrapper } from '../components/TimerWrapper';
 import { DateBox, Box, InputsBox } from '../components/boxes';
@@ -53,7 +53,7 @@ export default function CountdownTimer() {
 
   return (
     <Main>
-      <h2>Countdown Timer</h2>
+      <h3>Countdown Timer</h3>
       <InputsBox>
         <Box>
           <TextInput
