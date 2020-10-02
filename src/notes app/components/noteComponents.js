@@ -29,13 +29,29 @@ export const Form = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
-  margin: 30px;
   background: rgba(0.5, 0.5, 0.5, 0.5);
+  margin: 30px;
+  width: 300px;
+  font-size: 1.2rem;
 `;
 
 export const TitleField = styled.input`
+  padding: 15px 10px 0;
   background: transparent;
-  color: #dfdfdf;
+  font-size: 1.2rem;
+  border: none;
+  border-top: 1px solid #f6f6f6;
+  outline: none;
+  color: #f6f6f6;
+`;
+
+export const NoteBodyField = styled.input`
+  padding: 0 10px;
+  border: none;
+  background: transparent;
+  outline: none;
+  color: #f6f6f6;
+  height: 100px;
 `;
 
 export const Button = styled.button`

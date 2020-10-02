@@ -10,7 +10,9 @@ import {
   Data,
   ColorBorder,
   ColumnTitle,
-  Button
+  Button,
+  TitleField,
+  NoteBodyField
 } from '../components/noteComponents';
 
 export default function NotesApp() {
@@ -67,31 +69,66 @@ export default function NotesApp() {
   const _getForm = () => {
     return (
       <Form>
-        <label>
-          Add note
-          <input
-            type="text"
-            placeholder="title"
-            onChange={(event) => {
-              setTitle(event.target.value);
-            }}
-            value={title}
-          />
-        </label>
-        <label>
-          <input
-            type="text"
-            placeholder="write your note..."
-            onChange={(event) => {
-              setBody(event.target.value);
-            }}
-            value={body}
-          />
-        </label>
+        <p>Create new note</p>
+        <TitleField
+          type="text"
+          placeholder="Title"
+          onChange={(event) => {
+            setTitle(event.target.value);
+          }}
+          value={title}
+        />
+        <NoteBodyField
+          type="text"
+          placeholder="Write your note..."
+          onChange={(event) => {
+            setBody(event.target.value);
+          }}
+          value={body}
+        />
       </Form>
     );
   };
 
+  const _showNote = () => {
+    return (
+      <>
+        {notes ? (
+          notes.map((note, i) => {
+            return (
+              <Note key={i}>
+                <ColorBorder color={colors[4]}>
+                  <NoteTitle>{note.title}</NoteTitle>
+                  <Data>{date}</Data>
+                  <Paragraph>{note.body}</Paragraph>
+                  <div>
+                    <Button
+                      background="#759CC9"
+                      color="#759CC9"
+                      onClick={updateNote}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      background="#DD302F"
+                      color="#DD302F"
+                      onClick={removeNote}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      Remove
+                    </Button>
+                  </div>
+                </ColorBorder>
+              </Note>
+            );
+          })
+        ) : (
+          <div>Got Nothing</div>
+        )}
+      </>
+    );
+  };
   return (
     <>
       <Main>
@@ -101,39 +138,7 @@ export default function NotesApp() {
         <Wrapper>
           <Column>
             <ColumnTitle>To do</ColumnTitle>
-            {notes ? (
-              notes.map((note, i) => {
-                return (
-                  <Note key={i}>
-                    <ColorBorder color={colors[4]}>
-                      <NoteTitle>{note.title}</NoteTitle>
-                      <Data>{date}</Data>
-                      <Paragraph>{note.body}</Paragraph>
-                      <div>
-                        <Button
-                          background="#759CC9"
-                          color="#759CC9"
-                          onClick={updateNote}
-                          style={{ cursor: 'pointer' }}
-                        >
-                          Edit
-                        </Button>
-                        <Button
-                          background="#DD302F"
-                          color="#DD302F"
-                          onClick={removeNote}
-                          style={{ cursor: 'pointer' }}
-                        >
-                          Remove
-                        </Button>
-                      </div>
-                    </ColorBorder>
-                  </Note>
-                );
-              })
-            ) : (
-              <div>Got Nothing</div>
-            )}
+            {_showNote()}
           </Column>
           <Column>
             <ColumnTitle>In progress</ColumnTitle>
