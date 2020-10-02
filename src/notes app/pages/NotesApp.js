@@ -12,7 +12,8 @@ import {
   ColumnTitle,
   Button,
   TitleField,
-  NoteBodyField
+  NoteBodyField,
+  AddButton
 } from '../components/noteComponents';
 
 export default function NotesApp() {
@@ -86,6 +87,10 @@ export default function NotesApp() {
           }}
           value={body}
         />
+        <div>
+          <AddButton onClick={saveNote}>Add note</AddButton>
+          <AddButton onClick={getNote}>Show note</AddButton>
+        </div>
       </Form>
     );
   };
@@ -129,12 +134,11 @@ export default function NotesApp() {
       </>
     );
   };
+
   return (
     <>
       <Main>
         {_getForm()}
-        <button onClick={saveNote}>Add note</button>
-        <button onClick={getNote}>Show note</button>
         <Wrapper>
           <Column>
             <ColumnTitle>To do</ColumnTitle>

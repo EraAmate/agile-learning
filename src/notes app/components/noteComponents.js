@@ -27,7 +27,6 @@ export const Note = styled.div`
 
 export const Form = styled.div`
   display: flex;
-  justify-content: center;
   flex-direction: column;
   background: rgba(0.5, 0.5, 0.5, 0.5);
   margin: 30px;
@@ -68,7 +67,7 @@ export const Button = styled.button`
 `;
 
 export const ColorBorder = styled.div`
-  border-left: 4px solid ${(props) => props.color} /* #ffe400 */;
+  border-left: 4px solid ${(props) => props.color};
   padding-left: 20px;
   display: flex;
   flex-direction: column;
@@ -99,5 +98,21 @@ export const ColumnTitle = styled.h2`
   text-align: left;
   @media (max-width: 500px) {
     text-align: center;
+  }
+`;
+
+export const AddButton = styled.button`
+  padding: 10px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  outline: none;
+  background: none;
+  border: none;
+  color: #f6f6f6;
+  width: 50%;
+
+  &:hover {
+    background: grey;
+    color: yellow;
   }
 `;
