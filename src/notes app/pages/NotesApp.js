@@ -9,20 +9,34 @@ import {
   Paragraph,
   Data,
   ColorBorder,
-  ColumnTitle
+  ColumnTitle,
+  Button
 } from '../components/noteComponents';
 
 export default function NotesApp() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const [obj, setObj] = useState({});
+  const [obj, setObj] = useState({
+    title: 'Title',
+    body: 'Here comes your note'
+  });
+  const [color] = useState('');
   const [notes] = useState([obj]);
   /*  const [notes, setNotes] = useState(() => {
     console.log(JSON.parse(localStorage.getItem('Notes')));
   }); */
+  let colors = [
+    '#ECAE20',
+    'black',
+    'white',
+    'pink',
+    'yellow',
+    'green',
+    'blue'
+  ];
 
   function saveNote() {
-    let object = { title: title, body: body };
+    let object = { title: title, body: body, color: color };
 
     notes.push(object);
     let serializedNotes = JSON.stringify(notes);
@@ -50,32 +64,38 @@ export default function NotesApp() {
     '.' +
     today.getFullYear();
 
+  const _getForm = () => {
+    return (
+      <Form>
+        <label>
+          Add note
+          <input
+            type="text"
+            placeholder="title"
+            onChange={(event) => {
+              setTitle(event.target.value);
+            }}
+            value={title}
+          />
+        </label>
+        <label>
+          <input
+            type="text"
+            placeholder="write your note..."
+            onChange={(event) => {
+              setBody(event.target.value);
+            }}
+            value={body}
+          />
+        </label>
+      </Form>
+    );
+  };
+
   return (
     <>
       <Main>
-        <Form>
-          <label>
-            Add note
-            <input
-              type="text"
-              placeholder="title"
-              onChange={(event) => {
-                setTitle(event.target.value);
-              }}
-              value={title}
-            />
-          </label>
-          <label>
-            <input
-              type="text"
-              placeholder="write your note..."
-              onChange={(event) => {
-                setBody(event.target.value);
-              }}
-              value={body}
-            />
-          </label>
-        </Form>
+        {_getForm()}
         <button onClick={saveNote}>Add note</button>
         <button onClick={getNote}>Show note</button>
         <Wrapper>
@@ -85,23 +105,27 @@ export default function NotesApp() {
               notes.map((note, i) => {
                 return (
                   <Note key={i}>
-                    <ColorBorder>
+                    <ColorBorder color={colors[4]}>
                       <NoteTitle>{note.title}</NoteTitle>
                       <Data>{date}</Data>
                       <Paragraph>{note.body}</Paragraph>
                       <div>
-                        <button
+                        <Button
+                          background="#759CC9"
+                          color="#759CC9"
                           onClick={updateNote}
                           style={{ cursor: 'pointer' }}
                         >
-                          ✏️
-                        </button>
-                        <button
+                          Edit
+                        </Button>
+                        <Button
+                          background="#DD302F"
+                          color="#DD302F"
                           onClick={removeNote}
                           style={{ cursor: 'pointer' }}
                         >
-                          🗑
-                        </button>
+                          Remove
+                        </Button>
                       </div>
                     </ColorBorder>
                   </Note>

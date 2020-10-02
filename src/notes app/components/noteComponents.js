@@ -28,11 +28,31 @@ export const Note = styled.div`
 export const Form = styled.div`
   display: flex;
   justify-content: center;
+  flex-direction: column;
   margin: 30px;
+  background: rgba(0.5, 0.5, 0.5, 0.5);
+`;
+
+export const TitleField = styled.input`
+  background: transparent;
+  color: #dfdfdf;
+`;
+
+export const Button = styled.button`
+  padding: 5px;
+  margin: 15px 5px 0 0;
+  color: white;
+  border: 1px solid ${(props) => props.color};
+  background: none;
+  border-radius: 6px;
+
+  &:hover {
+    background: ${(props) => props.background};
+  }
 `;
 
 export const ColorBorder = styled.div`
-  border-left: 4px solid pink;
+  border-left: 4px solid ${(props) => props.color} /* #ffe400 */;
   padding-left: 20px;
   display: flex;
   flex-direction: column;

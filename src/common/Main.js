@@ -6,7 +6,7 @@ export const Main = styled.div`
   width: 100wh;
   padding: 40px 100px;
   font-size: 2rem;
-  color: white;
+  color: #f6f6f6;
   text-align: center;
   background-image: url(${grey});
   object-fit: cover;
