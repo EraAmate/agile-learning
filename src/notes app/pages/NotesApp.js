@@ -28,19 +28,10 @@ export default function NotesApp() {
   /*  const [notes, setNotes] = useState(() => {
     console.log(JSON.parse(localStorage.getItem('Notes')));
   }); */
-  let colors = [
-    '#ECAE20',
-    'black',
-    'white',
-    'pink',
-    'yellow',
-    'green',
-    'blue'
-  ];
+  let colors = ['#ECAE20', 'black', 'white', 'pink', 'yellow', 'green', 'blue'];
 
   function saveNote() {
     let object = { title: title, body: body, color: color };
-
     notes.push(object);
     let serializedNotes = JSON.stringify(notes);
     localStorage.setItem('Notes', serializedNotes);
@@ -60,12 +51,7 @@ export default function NotesApp() {
   }
 
   let today = new Date();
-  let date =
-    today.getDate() +
-    '.' +
-    today.toLocaleString('default', { month: 'short' }) +
-    '.' +
-    today.getFullYear();
+  let date = today.getDate() + '.' + today.toLocaleString('default', { month: 'short' }) + '.' + today.getFullYear();
 
   const _getForm = () => {
     return (
@@ -107,20 +93,10 @@ export default function NotesApp() {
                   <Data>{date}</Data>
                   <Paragraph>{note.body}</Paragraph>
                   <div>
-                    <Button
-                      background="#759CC9"
-                      color="#759CC9"
-                      onClick={updateNote}
-                      style={{ cursor: 'pointer' }}
-                    >
+                    <Button background="#759CC9" color="#759CC9" onClick={updateNote} style={{ cursor: 'pointer' }}>
                       Edit
                     </Button>
-                    <Button
-                      background="#DD302F"
-                      color="#DD302F"
-                      onClick={removeNote}
-                      style={{ cursor: 'pointer' }}
-                    >
+                    <Button background="#DD302F" color="#DD302F" onClick={removeNote} style={{ cursor: 'pointer' }}>
                       Remove
                     </Button>
                   </div>
