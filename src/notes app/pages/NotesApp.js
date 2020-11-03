@@ -136,8 +136,8 @@ export default function NotesApp() {
             <ColumnTitle>Done</ColumnTitle>
           </Column>
         </RightSide>
-        {_getForm()}
       </Body>
+      {_getForm()}
     </>
   );
 }
