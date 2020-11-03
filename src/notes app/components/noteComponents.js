@@ -1,9 +1,15 @@
 import styled from '@emotion/styled';
 
-export const Wrapper = styled.div`
+export const Body = styled.div`
+  color: #f6f6f6;
+  height: 100vh;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  column-gap: 50px;
+  grid-template-columns: 30% 70%;
+`;
+export const RightSide = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  column-gap: 10%;
   padding: 15px;
   font-size: 0.8rem;
   grid-auto-flow: row;
@@ -29,9 +35,10 @@ export const Form = styled.div`
   display: flex;
   flex-direction: column;
   background: rgba(0.5, 0.5, 0.5, 0.5);
-  margin: 30px;
   width: 300px;
   font-size: 1.2rem;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 export const TitleField = styled.input`
@@ -54,7 +61,7 @@ export const NoteBodyField = styled.input`
 `;
 
 export const Button = styled.button`
-  padding: 5px;
+  padding: 8px 12px;
   margin: 15px 5px 0 0;
   color: white;
   border: 1px solid ${(props) => props.color};
@@ -62,7 +69,9 @@ export const Button = styled.button`
   border-radius: 6px;
 
   &:hover {
-    background: ${(props) => props.background};
+    background: #4c4c4c;
+    border: none;
+    color: ${(props) => props.color};
   }
 `;
 
@@ -94,7 +103,8 @@ export const Paragraph = styled.p`
 `;
 
 export const ColumnTitle = styled.h2`
-  font-size: 30px;
+  font-size: 1.5rem;
+  margin-left: 10px;
   text-align: left;
   @media (max-width: 500px) {
     text-align: center;
