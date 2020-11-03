@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Main } from '../../common/Main';
+import { Header } from '../components/Header';
+import { FilterMenu } from '../components/FilterMenu';
+
 import {
   Form,
-  Wrapper,
+  RightSide,
   Column,
   Note,
   NoteTitle,
@@ -13,7 +15,8 @@ import {
   Button,
   TitleField,
   NoteBodyField,
-  AddButton
+  AddButton,
+  Body
 } from '../components/noteComponents';
 
 export default function NotesApp() {
@@ -28,19 +31,11 @@ export default function NotesApp() {
   /*  const [notes, setNotes] = useState(() => {
     console.log(JSON.parse(localStorage.getItem('Notes')));
   }); */
-  let colors = [
-    '#ECAE20',
-    'black',
-    'white',
-    'pink',
-    'yellow',
-    'green',
-    'blue'
-  ];
+
+  let colors = ['#ECAE20', 'black', 'white', 'pink', 'yellow', 'green', 'blue'];
 
   function saveNote() {
     let object = { title: title, body: body, color: color };
-
     notes.push(object);
     let serializedNotes = JSON.stringify(notes);
     localStorage.setItem('Notes', serializedNotes);
@@ -60,38 +55,37 @@ export default function NotesApp() {
   }
 
   let today = new Date();
-  let date =
-    today.getDate() +
-    '.' +
-    today.toLocaleString('default', { month: 'short' }) +
-    '.' +
-    today.getFullYear();
+  let date = today.getDate() + '.' + today.toLocaleString('default', { month: 'short' }) + '.' + today.getFullYear();
 
   const _getForm = () => {
     return (
-      <Form>
-        <p>Create new note</p>
-        <TitleField
-          type="text"
-          placeholder="Title"
-          onChange={(event) => {
-            setTitle(event.target.value);
-          }}
-          value={title}
-        />
-        <NoteBodyField
-          type="text"
-          placeholder="Write your note..."
-          onChange={(event) => {
-            setBody(event.target.value);
-          }}
-          value={body}
-        />
-        <div>
-          <AddButton onClick={saveNote}>Add note</AddButton>
-          <AddButton onClick={getNote}>Show note</AddButton>
-        </div>
-      </Form>
+      <>
+        <details style={{ cursor: 'pointer', marginBottom: '50px', right: '0px' }}>
+          <summary style={{ outline: 'none', fontSize: '1.7rem', marginBottom: '10px' }}>Create new note</summary>
+          <Form>
+            <TitleField
+              type="text"
+              placeholder="Title"
+              onChange={(event) => {
+                setTitle(event.target.value);
+              }}
+              value={title}
+            />
+            <NoteBodyField
+              type="text"
+              placeholder="Write your note..."
+              onChange={(event) => {
+                setBody(event.target.value);
+              }}
+              value={body}
+            />
+            <div>
+              <AddButton onClick={saveNote}>Add note</AddButton>
+              <AddButton onClick={getNote}>Show note</AddButton>
+            </div>
+          </Form>
+        </details>
+      </>
     );
   };
 
@@ -107,20 +101,10 @@ export default function NotesApp() {
                   <Data>{date}</Data>
                   <Paragraph>{note.body}</Paragraph>
                   <div>
-                    <Button
-                      background="#759CC9"
-                      color="#759CC9"
-                      onClick={updateNote}
-                      style={{ cursor: 'pointer' }}
-                    >
+                    <Button background="#2196F3" color="#2196F3" onClick={updateNote} style={{ cursor: 'pointer' }}>
                       Edit
                     </Button>
-                    <Button
-                      background="#DD302F"
-                      color="#DD302F"
-                      onClick={removeNote}
-                      style={{ cursor: 'pointer' }}
-                    >
+                    <Button background="#D06778" color="#DD302F" onClick={removeNote} style={{ cursor: 'pointer' }}>
                       Remove
                     </Button>
                   </div>
@@ -137,9 +121,10 @@ export default function NotesApp() {
 
   return (
     <>
-      <Main>
-        {_getForm()}
-        <Wrapper>
+      <Header text="Notes" />
+      <Body>
+        <FilterMenu />
+        <RightSide>
           <Column>
             <ColumnTitle>To do</ColumnTitle>
             {_showNote()}
@@ -150,8 +135,9 @@ export default function NotesApp() {
           <Column>
             <ColumnTitle>Done</ColumnTitle>
           </Column>
-        </Wrapper>
-      </Main>
+        </RightSide>
+      </Body>
+      {_getForm()}
     </>
   );
 }
