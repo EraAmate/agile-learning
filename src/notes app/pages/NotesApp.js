@@ -5,18 +5,23 @@ import { ModalInput } from '../components/modalComponents';
 import { RightSide, Column, Note, NoteTitle, Paragraph, Data, ColorBorder, ColumnTitle, Button, Body } from '../components/noteComponents';
 import { useModal } from '../../hooks/useModal';
 import useGetNotes from '../../hooks/useGetNotes';
+import Loading from '../components/Loading';
 
 export default function NotesApp() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
   const { show, DisplayModal } = useModal();
-  const { notes } = useGetNotes();
+  const { notes, isLoading } = useGetNotes();
 
   let today = new Date();
   let date = today.getDate() + '.' + today.toLocaleString('default', { month: 'short' }) + '.' + today.getFullYear();
 
   const _showNote = () => {
+    if (isLoading) {
+      return <Loading />;
+    }
+
     return (
       <>
         {notes ? (
