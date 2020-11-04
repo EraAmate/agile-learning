@@ -1,20 +1,25 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 function useGetNotes() {
   const [notes, setNotes] = useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [errorMessage, setErrorMessage] = React.useState(false);
 
   useEffect(() => {
     async function getAllNotes() {
-      const response = await fetch(process.env.NOTES_API || 'https://my-json-server.typicode.com/EraAmate/agile-learning/notes');
-      if (!response.ok) {
-        throw new Error(response.statusText);
+      try {
+        setIsLoading(true);
+        const response = await fetch(process.env.NOTES_API || 'https://my-json-server.typicode.com/EraAmate/agile-learning/notes');
+        const notes = await response.json();
+        setNotes(notes);
+        setIsLoading(false);
+      } catch (error) {
+        setErrorMessage(error.message);
       }
-      const notes = await response.json();
-      setNotes(notes);
     }
     getAllNotes();
   }, []);
-  return { notes };
+  return { notes, isLoading, errorMessage };
 }
 
 export default useGetNotes;
