@@ -4,34 +4,14 @@ import { FilterMenu } from '../components/FilterMenu';
 import { ModalInput } from '../components/modalComponents';
 import { RightSide, Column, Note, NoteTitle, Paragraph, Data, ColorBorder, ColumnTitle, Button, Body } from '../components/noteComponents';
 import { useModal } from '../../hooks/useModal';
+import useGetNotes from '../../hooks/useGetNotes';
 
 export default function NotesApp() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const { show, DisplayModal } = useModal();
-  let notes = [
-    {
-      title: 'title',
-      body: 'body'
-    }
-  ];
-  async function createNote(event) {
-    event.preventDefault();
-    const note = {
-      title: title,
-      body: body
-    };
 
-    const response = await fetch(process.env.REACT_APP_POLLS_API, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(note)
-    });
-    const createdNote = await response.json();
-    alert(`Note has been created with id ${createdNote.id}`);
-  }
+  const { show, DisplayModal } = useModal();
+  const { notes } = useGetNotes();
 
   let today = new Date();
   let date = today.getDate() + '.' + today.toLocaleString('default', { month: 'short' }) + '.' + today.getFullYear();
@@ -71,7 +51,7 @@ export default function NotesApp() {
       <Header text="Notes" onClick={show} />
       <Body>
         <FilterMenu />
-        <DisplayModal addNote={createNote} modalHeaderText="Create new note">
+        <DisplayModal modalHeaderText="Create new note">
           <ModalInput
             type="text"
             placeholder="title..."
