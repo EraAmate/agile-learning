@@ -46,9 +46,8 @@ export const TitleField = styled.input`
   background: transparent;
   font-size: 1.2rem;
   border: none;
-  border-top: 1px solid #f6f6f6;
   outline: none;
-  color: #f6f6f6;
+  color: ${(props) => props.theme.colors.primary};
 `;
 
 export const NoteBodyField = styled.input`
@@ -56,14 +55,14 @@ export const NoteBodyField = styled.input`
   border: none;
   background: transparent;
   outline: none;
-  color: #f6f6f6;
+  color: ${(props) => props.theme.colors.primary};
   height: 100px;
 `;
 
 export const Button = styled.button`
   padding: 8px 12px;
   margin: 15px 5px 0 0;
-  color: white;
+  color: ${(props) => props.theme.colors.primary};
   border: 1px solid ${(props) => props.color};
   background: none;
   border-radius: 6px;
@@ -108,21 +107,5 @@ export const ColumnTitle = styled.h2`
   text-align: left;
   @media (max-width: 500px) {
     text-align: center;
-  }
-`;
-
-export const AddButton = styled.button`
-  padding: 10px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  outline: none;
-  background: none;
-  border: none;
-  color: #f6f6f6;
-  width: 50%;
-
-  &:hover {
-    background: grey;
-    color: yellow;
   }
 `;

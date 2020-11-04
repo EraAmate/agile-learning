@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Header } from '../components/Header';
 import { FilterMenu } from '../components/FilterMenu';
-
+import { ModalInput } from '../components/modalComponents';
 import { RightSide, Column, Note, NoteTitle, Paragraph, Data, ColorBorder, ColumnTitle, Button, Body } from '../components/noteComponents';
 import { useModal } from '../../hooks/useModal';
 
@@ -78,8 +78,8 @@ export default function NotesApp() {
       <Header text="Notes" onClick={show} />
       <Body>
         <FilterMenu />
-        <DisplayModal addNote={saveNote} modalHeaderText="Modal Title">
-          <input
+        <DisplayModal addNote={saveNote} modalHeaderText="Create new note">
+          <ModalInput
             type="text"
             placeholder="title..."
             onChange={(event) => {
@@ -87,7 +87,8 @@ export default function NotesApp() {
             }}
             value={title}
           />
-          <input
+          <ModalInput
+            height="50px"
             type="text"
             placeholder="text..."
             onChange={(event) => {
