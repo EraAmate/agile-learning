@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^7.2.1",
     "bootstrap": "^4.5.3",
     "crooks": "^1.0.23",
+    "dotenv": "^8.2.0",
     "emotion-theming": "^10.0.27",
     "react": "^16.13.1",
     "react-date-countdown-timer": "^1.0.4",
@@ -30,7 +31,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "api": "json-server --watch db.json --port 4000"
+    "api": "json-server --watch db.json --port 5000"
   },
   "eslintConfig": {
     "extends": "react-app"

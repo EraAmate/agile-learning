@@ -29,6 +29,7 @@ export const Note = styled.div`
   margin: 10px;
   border-radius: 10px;
   background: rgba(0.5, 0.5, 0.5, 0.5);
+  cursor: pointer;
 `;
 
 export const Form = styled.div`
