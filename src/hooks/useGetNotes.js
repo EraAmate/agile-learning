@@ -5,8 +5,7 @@ function useGetNotes() {
 
   useEffect(() => {
     async function getAllNotes() {
-      // useEffect
-      const response = await fetch(/* process.env.REACT_APP_NOTES_API || */ 'https://my-json-server.typicode.com/EraAmate/agile-learning/notes');
+      const response = await fetch(process.env.NOTES_API || 'https://my-json-server.typicode.com/EraAmate/agile-learning/notes');
       if (!response.ok) {
         throw new Error(response.statusText);
       }
@@ -14,7 +13,7 @@ function useGetNotes() {
       setNotes(notes);
     }
     getAllNotes();
-  }, [notes]);
+  }, []);
   return { notes };
 }
 
