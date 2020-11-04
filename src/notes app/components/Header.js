@@ -5,6 +5,26 @@ import Tooltip from '@material-ui/core/Tooltip';
 import AddIcon from '@material-ui/icons/Add';
 import PropTypes from 'prop-types';
 
+export function Header({ onClick, text }) {
+  return (
+    <Wrapper>
+      <Img src={Logo} />
+      <Name>{text}</Name>
+      <SearchInput placeholder="Search here for notes..." />
+      <Tooltip title="Create new note" aria-label="add">
+        <AddBtn onClick={onClick} />
+      </Tooltip>
+    </Wrapper>
+  );
+}
+
+Header.propTypes = {
+  text: PropTypes.string,
+  onClick: PropTypes.func
+};
+
+// Components
+
 const Wrapper = styled.header`
   display: flex;
   padding: 10px 30px;
@@ -45,20 +65,3 @@ const AddBtn = styled(AddIcon)`
   cursor: pointer;
   margin-left: auto;
 `;
-export function Header({ onClick, text }) {
-  return (
-    <Wrapper>
-      <Img src={Logo} />
-      <Name>{text}</Name>
-      <SearchInput placeholder="Search here for notes..." />
-      <Tooltip title="Create new note" aria-label="add">
-        <AddBtn onClick={onClick} />
-      </Tooltip>
-    </Wrapper>
-  );
-}
-
-Header.propTypes = {
-  text: PropTypes.string,
-  onClick: PropTypes.func
-};

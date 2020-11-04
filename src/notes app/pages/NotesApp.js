@@ -2,22 +2,8 @@ import React, { useState } from 'react';
 import { Header } from '../components/Header';
 import { FilterMenu } from '../components/FilterMenu';
 
-import {
-  Form,
-  RightSide,
-  Column,
-  Note,
-  NoteTitle,
-  Paragraph,
-  Data,
-  ColorBorder,
-  ColumnTitle,
-  Button,
-  TitleField,
-  NoteBodyField,
-  AddButton,
-  Body
-} from '../components/noteComponents';
+import { RightSide, Column, Note, NoteTitle, Paragraph, Data, ColorBorder, ColumnTitle, Button, Body } from '../components/noteComponents';
+import { useModal } from '../../hooks/useModal';
 
 export default function NotesApp() {
   const [title, setTitle] = useState('');
@@ -28,9 +14,7 @@ export default function NotesApp() {
   });
   const [color] = useState('');
   const [notes] = useState([obj]);
-  /*  const [notes, setNotes] = useState(() => {
-    console.log(JSON.parse(localStorage.getItem('Notes')));
-  }); */
+  const { show, DisplayModal } = useModal();
 
   let colors = ['#ECAE20', 'black', 'white', 'pink', 'yellow', 'green', 'blue'];
 
@@ -39,12 +23,14 @@ export default function NotesApp() {
     notes.push(object);
     let serializedNotes = JSON.stringify(notes);
     localStorage.setItem('Notes', serializedNotes);
-  }
-
-  function getNote() {
     let notes = JSON.parse(localStorage.getItem('Notes'));
     setObj(notes);
   }
+  /* 
+    function getNote() {
+      let notes = JSON.parse(localStorage.getItem('Notes'));
+      setObj(notes);
+    } */
 
   function removeNote() {
     alert('Comming soon...');
@@ -56,38 +42,6 @@ export default function NotesApp() {
 
   let today = new Date();
   let date = today.getDate() + '.' + today.toLocaleString('default', { month: 'short' }) + '.' + today.getFullYear();
-
-  const _getForm = () => {
-    return (
-      <>
-        <details style={{ cursor: 'pointer', marginBottom: '50px', right: '0px' }}>
-          <summary style={{ outline: 'none', fontSize: '1.7rem', marginBottom: '10px' }}>Create new note</summary>
-          <Form>
-            <TitleField
-              type="text"
-              placeholder="Title"
-              onChange={(event) => {
-                setTitle(event.target.value);
-              }}
-              value={title}
-            />
-            <NoteBodyField
-              type="text"
-              placeholder="Write your note..."
-              onChange={(event) => {
-                setBody(event.target.value);
-              }}
-              value={body}
-            />
-            <div>
-              <AddButton onClick={saveNote}>Add note</AddButton>
-              <AddButton onClick={getNote}>Show note</AddButton>
-            </div>
-          </Form>
-        </details>
-      </>
-    );
-  };
 
   const _showNote = () => {
     return (
@@ -121,9 +75,27 @@ export default function NotesApp() {
 
   return (
     <>
-      <Header text="Notes" />
+      <Header text="Notes" onClick={show} />
       <Body>
         <FilterMenu />
+        <DisplayModal addNote={saveNote} modalHeaderText="Modal Title">
+          <input
+            type="text"
+            placeholder="title..."
+            onChange={(event) => {
+              setTitle(event.target.value);
+            }}
+            value={title}
+          />
+          <input
+            type="text"
+            placeholder="text..."
+            onChange={(event) => {
+              setBody(event.target.value);
+            }}
+            value={body}
+          />
+        </DisplayModal>
         <RightSide>
           <Column>
             <ColumnTitle>To do</ColumnTitle>
@@ -137,7 +109,6 @@ export default function NotesApp() {
           </Column>
         </RightSide>
       </Body>
-      {_getForm()}
     </>
   );
 }
