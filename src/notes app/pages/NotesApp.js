@@ -8,36 +8,29 @@ import { useModal } from '../../hooks/useModal';
 export default function NotesApp() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
-  const [obj, setObj] = useState({
-    title: 'Title',
-    body: 'Here comes your note'
-  });
-  const [color] = useState('');
-  const [notes] = useState([obj]);
   const { show, DisplayModal } = useModal();
+  let notes = [
+    {
+      title: 'title',
+      body: 'body'
+    }
+  ];
+  async function createNote(event) {
+    event.preventDefault();
+    const note = {
+      title: title,
+      body: body
+    };
 
-  let colors = ['#ECAE20', 'black', 'white', 'pink', 'yellow', 'green', 'blue'];
-
-  function saveNote() {
-    let object = { title: title, body: body, color: color };
-    notes.push(object);
-    let serializedNotes = JSON.stringify(notes);
-    localStorage.setItem('Notes', serializedNotes);
-    let notes = JSON.parse(localStorage.getItem('Notes'));
-    setObj(notes);
-  }
-  /* 
-    function getNote() {
-      let notes = JSON.parse(localStorage.getItem('Notes'));
-      setObj(notes);
-    } */
-
-  function removeNote() {
-    alert('Comming soon...');
-  }
-
-  function updateNote() {
-    alert('Comming soon...');
+    const response = await fetch(process.env.REACT_APP_POLLS_API, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(note)
+    });
+    const createdNote = await response.json();
+    alert(`Note has been created with id ${createdNote.id}`);
   }
 
   let today = new Date();
@@ -50,15 +43,15 @@ export default function NotesApp() {
           notes.map((note, i) => {
             return (
               <Note key={i}>
-                <ColorBorder color={colors[4]}>
+                <ColorBorder color="yellow">
                   <NoteTitle>{note.title}</NoteTitle>
                   <Data>{date}</Data>
                   <Paragraph>{note.body}</Paragraph>
                   <div>
-                    <Button background="#2196F3" color="#2196F3" onClick={updateNote} style={{ cursor: 'pointer' }}>
+                    <Button background="#2196F3" color="#2196F3" style={{ cursor: 'pointer' }}>
                       Edit
                     </Button>
-                    <Button background="#D06778" color="#DD302F" onClick={removeNote} style={{ cursor: 'pointer' }}>
+                    <Button background="#D06778" color="#DD302F" style={{ cursor: 'pointer' }}>
                       Remove
                     </Button>
                   </div>
@@ -78,23 +71,23 @@ export default function NotesApp() {
       <Header text="Notes" onClick={show} />
       <Body>
         <FilterMenu />
-        <DisplayModal addNote={saveNote} modalHeaderText="Create new note">
+        <DisplayModal addNote={createNote} modalHeaderText="Create new note">
           <ModalInput
             type="text"
             placeholder="title..."
+            value={title}
             onChange={(event) => {
               setTitle(event.target.value);
             }}
-            value={title}
           />
           <ModalInput
             height="50px"
             type="text"
             placeholder="text..."
+            value={body}
             onChange={(event) => {
               setBody(event.target.value);
             }}
-            value={body}
           />
         </DisplayModal>
         <RightSide>
