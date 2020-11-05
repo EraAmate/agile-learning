@@ -3,22 +3,32 @@
         {
             "id": 1,
             "title": "Drink more water",
-            "body": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr"
+            "body": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr",
+            "date": "04.09.2020"
         },
         {
             "id": 2,
             "title": "Learn Redux",
-            "body": "Lorem ipsum dolor sit amet"
+            "body": "Lorem ipsum dolor sit amet",
+            "date": "08.10.2020"
         },
         {
             "id": 3,
             "title": "FR workshop",
-            "body": "Lorem ipsum dolor sit amet, consetetur sadipscing"
+            "body": "Lorem ipsum dolor sit amet, consetetur sadipscing",
+            "date": "08.10.2020"
         },
         {
             "id": 4,
             "title": "FR workshop",
-            "body": "Lorem ipsum dolor sit amet, consetetur sadipscing"
+            "body": "Lorem ipsum dolor sit amet, consetetur sadipscing",
+            "date": "05.11.2020"
+        },
+        {
+            "id": 5,
+            "title": "Lira project",
+            "body": "Lorem ipsum dolor sit amet, consetetur sadipscing",
+            "date": "05.11.2020"
         }
     ]
 }
