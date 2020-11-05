@@ -4,14 +4,14 @@ import { ModalButton, ModalFooter, ModalHeader, ModalWrapper } from './modalComp
 function Modal({ modalHeaderText, children, closeModal, addNote }) {
   return (
     <ModalWrapper>
-      <form>
+      <form onSubmit={addNote}>
         <ModalHeader>{modalHeaderText}</ModalHeader>
         {children}
         <ModalFooter>
           <ModalButton bgColor="#525252" color="white" onClick={closeModal}>
             Close
           </ModalButton>
-          <ModalButton color="white" bgColor="#2196F3" brColor="#2196F3" onClick={addNote}>
+          <ModalButton type="submit" color="white" bgColor="#2196F3" brColor="#2196F3">
             Create
           </ModalButton>
         </ModalFooter>

@@ -7,14 +7,14 @@ export const useModal = () => {
   const show = () => setIsVisible(true);
   const hide = () => setIsVisible(false);
   // eslint-disable-next-line
-  const DisplayModal = ({ children, modalHeaderText }) => (
-    <React.Fragment>
+  const DisplayModal = ({ children, modalHeaderText, addNote }) => (
+    <>
       {isVisible && (
-        <Modal modalHeaderText={modalHeaderText} closeModal={hide}>
+        <Modal modalHeaderText={modalHeaderText} addNote={addNote} closeModal={hide}>
           {children}
         </Modal>
       )}
-    </React.Fragment>
+    </>
   );
 
   return {

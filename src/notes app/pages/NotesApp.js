@@ -2,20 +2,41 @@ import React, { useState } from 'react';
 import { Header } from '../components/Header';
 import { FilterMenu } from '../components/FilterMenu';
 import { ModalInput } from '../components/modalComponents';
+import Loading from '../components/Loading';
 import { RightSide, Column, Note, NoteTitle, Paragraph, Data, ColorBorder, ColumnTitle, Button, Body } from '../components/noteComponents';
+
 import { useModal } from '../../hooks/useModal';
 import useGetNotes from '../../hooks/useGetNotes';
-import Loading from '../components/Loading';
+
+import { postNote } from '../api/notes';
 
 export default function NotesApp() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
 
-  const { show, DisplayModal } = useModal();
-  const { notes, isLoading } = useGetNotes();
+  const { show, DisplayModal, hide } = useModal();
+  const { notes, isLoading, setNotes } = useGetNotes();
 
-  let today = new Date();
-  let date = today.getDate() + '.' + today.toLocaleString('default', { month: 'short' }) + '.' + today.getFullYear();
+  function getDate() {
+    let today = new Date();
+    let date = today.getDate() + '.' + today.toLocaleString('default', { month: 'short' }) + '.' + today.getFullYear();
+    return date;
+  }
+
+  async function handleAddNote(event) {
+    event.preventDefault();
+
+    const note = {
+      title: title,
+      body: body,
+      date: getDate()
+    };
+
+    console.log(note);
+    const createdNote = await postNote(note);
+    setNotes([...notes, createdNote]);
+    hide();
+  }
 
   const _showNote = () => {
     if (isLoading) {
@@ -30,7 +51,7 @@ export default function NotesApp() {
               <Note key={i}>
                 <ColorBorder color="yellow">
                   <NoteTitle>{note.title}</NoteTitle>
-                  <Data>{date}</Data>
+                  <Data>{note.date}</Data>
                   <Paragraph>{note.body}</Paragraph>
                   <div>
                     <Button background="#2196F3" color="#2196F3" style={{ cursor: 'pointer' }}>
@@ -56,7 +77,7 @@ export default function NotesApp() {
       <Header text="Notes" onClick={show} />
       <Body>
         <FilterMenu />
-        <DisplayModal modalHeaderText="Create new note">
+        <DisplayModal addNote={handleAddNote} modalHeaderText="Create new note">
           <ModalInput
             type="text"
             placeholder="title..."
