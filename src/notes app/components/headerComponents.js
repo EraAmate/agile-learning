@@ -1,4 +1,5 @@
 import AddIcon from '@material-ui/icons/Add';
+import SearchIcon from '@material-ui/icons/Search';
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.header`
@@ -20,20 +21,32 @@ export const Img = styled.img`
   margin-right: 15px;
 `;
 export const SearchInput = styled.input`
-  width: 60%;
-  padding: 10px;
+  padding: 10px 10px 10px 35px;
   font-size: 1rem;
   border-radius: 8px;
-  opacity: 0.6;
-  max-width: 200px;
-  display: block;
   outline: none;
-
-  &:hover {
-    max-width: 350px;
-    transition: 1s;
-  }
+  width: 100%;
 `;
+
+export const Inputfield = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 250px;
+  padding: 0 10px;
+  right: 0;
+  margin-right: 90px;
+  opacity: 0.5;
+`;
+
+export const Search = styled(SearchIcon)`
+  text-align: left;
+  position: absolute;
+  align-self: center;
+  margin-left: 10px;
+  color: ${(props) => props.theme.colors.secondary};
+`;
+
 export const AddBtn = styled(AddIcon)`
   background: ${(props) => props.theme.colors.btnSecondary};
   border-radius: 50%;

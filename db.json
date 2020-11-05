@@ -2,7 +2,7 @@
     "notes": [
         {
             "id": 1,
-            "title": "Drink more water",
+            "title": "Bye tickets",
             "body": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr",
             "date": "04.09.2020"
         },
@@ -14,21 +14,9 @@
         },
         {
             "id": 3,
-            "title": "FR workshop",
+            "title": "PWA workshop",
             "body": "Lorem ipsum dolor sit amet, consetetur sadipscing",
-            "date": "08.10.2020"
-        },
-        {
-            "id": 4,
-            "title": "FR workshop",
-            "body": "Lorem ipsum dolor sit amet, consetetur sadipscing",
-            "date": "05.11.2020"
-        },
-        {
-            "id": 5,
-            "title": "Lira project",
-            "body": "Lorem ipsum dolor sit amet, consetetur sadipscing",
-            "date": "05.11.2020"
+            "date": "04.11.2020"
         }
     ]
 }
