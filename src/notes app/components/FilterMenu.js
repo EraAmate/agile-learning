@@ -23,12 +23,11 @@ export function FilterMenu() {
   );
 }
 
-export const Wrapper = styled.header`
+export const Wrapper = styled.div`
   padding: 30px 10px;
   font-size: 1.1rem;
   color: ${(props) => props.theme.colors.primary};
   background: rgba(0.5, 0.5, 0.5, 0.5);
-  max-width: 250px;
 `;
 const List = styled.ul`
   list-style: none;

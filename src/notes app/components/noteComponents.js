@@ -4,15 +4,17 @@ export const Body = styled.div`
   color: #f6f6f6;
   height: 100vh;
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 20% 80%;
 `;
+
 export const RightSide = styled.div`
   display: grid;
+  width: 100%;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  column-gap: 10%;
   padding: 15px;
   font-size: 0.8rem;
   grid-auto-flow: row;
+  column-gap: 5%;
 `;
 
 export const Column = styled.div`
@@ -30,6 +32,10 @@ export const Note = styled.div`
   border-radius: 10px;
   background: rgba(0.5, 0.5, 0.5, 0.5);
   cursor: pointer;
+
+  &:hover {
+    box-shadow: 1px 1px 1px white;
+  }
 `;
 
 export const Form = styled.div`
