@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Modal from '../notes app/components/Modal';
+import Modal from '../components/Modal';
 
 export const useModal = () => {
   const [isVisible, setIsVisible] = useState(false);
