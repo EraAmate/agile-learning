@@ -5,10 +5,10 @@ import { ModalInput } from '../components/modalComponents';
 import Loading from '../components/Loading';
 import { RightSide, Column, Note, NoteTitle, Paragraph, Data, ColorBorder, ColumnTitle, Button, Body } from '../components/noteComponents';
 
-import { useModal } from '../../hooks/useModal';
-import useGetNotes from '../../hooks/useGetNotes';
+import { useModal } from '../hooks/useModal';
+import useGetNotes from '../hooks/useGetNotes';
 
-import { postNote } from '../api/notes';
+import { postNote, deleteNote, getAllNotes } from '../api/notes';
 
 export default function NotesApp() {
   const [title, setTitle] = useState('');
@@ -32,10 +32,15 @@ export default function NotesApp() {
       date: getDate()
     };
 
-    console.log(note);
     const createdNote = await postNote(note);
     setNotes([...notes, createdNote]);
     hide();
+  }
+
+  async function handleDelete(id) {
+    await deleteNote(id);
+    const notes = await getAllNotes();
+    setNotes(notes);
   }
 
   const _showNote = () => {
@@ -57,7 +62,7 @@ export default function NotesApp() {
                     <Button background="#2196F3" color="#2196F3" style={{ cursor: 'pointer' }}>
                       Edit
                     </Button>
-                    <Button background="#D06778" color="#DD302F" style={{ cursor: 'pointer' }}>
+                    <Button background="#D06778" color="#DD302F" style={{ cursor: 'pointer' }} onClick={() => handleDelete(note.id)}>
                       Remove
                     </Button>
                   </div>

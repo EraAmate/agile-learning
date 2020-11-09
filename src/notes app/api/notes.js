@@ -14,3 +14,32 @@ export async function postNote(note) {
   const createdNote = await response.json();
   return createdNote;
 }
+
+export async function getAllNotes() {
+  const response = await fetch(NOTES_API_URL, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify()
+  });
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  const notes = await response.json();
+  return notes;
+}
+
+export async function deleteNote(id) {
+  const response = await fetch(`${NOTES_API_URL}/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify()
+  });
+  if (!response.ok) {
+    throw new Error(response.statusText);
+  }
+  return response.json();
+}
