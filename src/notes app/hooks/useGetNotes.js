@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+const NOTES_API_URL = process.env.REACT_APP_NOTES_API || 'https://my-json-server.typicode.com/EraAmate/agile-learning/notes';
+
 function useGetNotes() {
   const [notes, setNotes] = useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
@@ -9,7 +11,7 @@ function useGetNotes() {
     async function getAllNotes() {
       try {
         setIsLoading(true);
-        const response = await fetch(process.env.REACT_APP_NOTES_API || 'https://my-json-server.typicode.com/EraAmate/agile-learning/notes');
+        const response = await fetch(NOTES_API_URL);
         const notes = await response.json();
         setNotes(notes);
         setIsLoading(false);
