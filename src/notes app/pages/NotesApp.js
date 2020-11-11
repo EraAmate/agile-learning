@@ -13,6 +13,7 @@ import { postNote, deleteNote, getAllNotes } from '../api/notes';
 export default function NotesApp() {
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
+  const [searchWord, setSearchWord] = useState('');
 
   const { show, DisplayModal, hide } = useModal();
   const { notes, isLoading, setNotes } = useGetNotes();
@@ -59,10 +60,10 @@ export default function NotesApp() {
                   <Data>{note.date}</Data>
                   <Paragraph>{note.body}</Paragraph>
                   <div>
-                    <Button background="#2196F3" color="#2196F3" style={{ cursor: 'pointer' }}>
+                    <Button background="#2196F3" color="#2196F3">
                       Edit
                     </Button>
-                    <Button background="#D06778" color="#DD302F" style={{ cursor: 'pointer' }} onClick={() => handleDelete(note.id)}>
+                    <Button background="#D06778" color="#DD302F" onClick={() => handleDelete(note.id)}>
                       Remove
                     </Button>
                   </div>
@@ -77,9 +78,19 @@ export default function NotesApp() {
     );
   };
 
+  function handleOnChange(event) {
+    setSearchWord(event.target.value);
+    console.log(searchWord);
+    console.log(notes);
+
+    let result = notes.filter((note) => note.title.includes(searchWord, 0));
+    setNotes(result);
+    console.log(notes);
+  }
+
   return (
     <>
-      <Header text="Notes" onClick={show} />
+      <Header text="Notes" onClick={show} value={searchWord} inputOnChange={handleOnChange} />
       <Body>
         <FilterMenu />
         <DisplayModal addNote={handleAddNote} modalHeaderText="Create new note">
