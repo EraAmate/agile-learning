@@ -73,6 +73,7 @@ export const Button = styled.button`
   border: 1px solid ${(props) => props.color};
   background: none;
   border-radius: 6px;
+  cursor: pointer;
 
   &:hover {
     background: #4c4c4c;

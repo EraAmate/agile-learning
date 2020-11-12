@@ -4,13 +4,13 @@ import Tooltip from '@material-ui/core/Tooltip';
 import PropTypes from 'prop-types';
 import { Wrapper, Img, Name, SearchInput, AddBtn, Search, Inputfield } from './headerComponents';
 
-export function Header({ onClick, text }) {
+export function Header({ onClick, text, inputOnChange, value }) {
   return (
     <Wrapper>
       <Img src={Logo} />
       <Name>{text}</Name>
       <Inputfield>
-        <SearchInput placeholder="Search here for notes..." />
+        <SearchInput type="text" placeholder="Search here for notes..." onChange={inputOnChange} value={value} />
         <Search />
       </Inputfield>
       <Tooltip title="Create new note" aria-label="add">
@@ -22,5 +22,7 @@ export function Header({ onClick, text }) {
 
 Header.propTypes = {
   text: PropTypes.string,
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  inputOnChange: PropTypes.func,
+  value: PropTypes.string
 };

@@ -36,7 +36,7 @@ export const Inputfield = styled.div`
   padding: 0 10px;
   right: 0;
   margin-right: 90px;
-  opacity: 0.5;
+  opacity: 0.6;
 `;
 
 export const Search = styled(SearchIcon)`
@@ -44,6 +44,7 @@ export const Search = styled(SearchIcon)`
   position: absolute;
   align-self: center;
   margin-left: 10px;
+  opacity: 0.6;
   color: ${(props) => props.theme.colors.secondary};
 `;
 
