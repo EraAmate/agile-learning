@@ -10,7 +10,7 @@ Runs the app in the development mode:
 
 `npm run dev`
 
-Command will start a few processes concurrently:
+It starts a few processes concurrently:
 
 - `npm run build`
 - `npm run start`
