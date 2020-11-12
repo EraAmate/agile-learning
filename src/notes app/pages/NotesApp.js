@@ -41,9 +41,17 @@ export default function NotesApp() {
   }
 
   useEffect(() => {
-    let result = notes.filter((note) => note.title.includes(searchWord, 0));
-    setNotes(result);
-    console.log(searchWord);
+    async function doFilter() {
+      let result = notes.filter((note) => note.title.toLowerCase().includes(searchWord.toLowerCase(), 0));
+      setNotes(result);
+      console.log(searchWord);
+
+      if (!searchWord) {
+        const notes = await getAllNotes();
+        setNotes(notes);
+      }
+    }
+    doFilter();
   }, [searchWord]);
 
   const _showNote = () => {
