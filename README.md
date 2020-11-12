@@ -17,4 +17,5 @@ It starts a few processes concurrently:
 - `npm run api`
 
 APP runs on the [http://localhost:3000](http://localhost:3000).
-API runs on the [http://localhost:5000].
+
+API runs on the [http://localhost:5000](http://localhost:5000)..
