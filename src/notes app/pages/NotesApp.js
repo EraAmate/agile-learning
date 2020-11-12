@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { deleteNote, getAllNotes, postNote } from '../api/notes';
 import { FilterMenu } from '../components/FilterMenu';
 import { Header } from '../components/Header';
@@ -40,15 +40,11 @@ export default function NotesApp() {
     setNotes(notes);
   }
 
-  function handleFilter(event) {
-    setSearchWord(event.target.value);
-    console.log(searchWord);
-    console.log(notes);
-
+  useEffect(() => {
     let result = notes.filter((note) => note.title.includes(searchWord, 0));
     setNotes(result);
-    console.log(notes);
-  }
+    console.log(searchWord);
+  }, [searchWord]);
 
   const _showNote = () => {
     if (isLoading) {
@@ -86,7 +82,7 @@ export default function NotesApp() {
 
   return (
     <>
-      <Header text="Notes" onClick={show} value={searchWord} inputOnChange={handleFilter} />
+      <Header text="Notes" onClick={show} value={searchWord} inputOnChange={(e) => setSearchWord(e.target.value)} />
       <Body>
         <FilterMenu />
         <DisplayModal addNote={handleAddNote} modalHeaderText="Create new note" />
