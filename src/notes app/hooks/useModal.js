@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+/* import React, { useState } from 'react';
 import Modal from '../components/Modal';
 
 const useModal = () => {
@@ -35,3 +35,4 @@ const useModal = () => {
 };
 
 export default useModal;
+ */
