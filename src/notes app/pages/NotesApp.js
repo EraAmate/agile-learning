@@ -41,13 +41,16 @@ export default function NotesApp() {
   }
 
   useEffect(() => {
-    let previewNotes = notes;
-    let result = notes.filter((note) => note.title.toLowerCase().includes(searchWord.toLowerCase(), 0));
-    setNotes(result);
+    async function showAllNotes() {
+      let result = notes.filter((note) => note.title.toLowerCase().includes(searchWord.toLowerCase(), 0));
+      setNotes(result);
 
-    if (!searchWord) {
-      setNotes(previewNotes);
+      if (!searchWord) {
+        const notes = await getAllNotes();
+        setNotes(notes);
+      }
     }
+    showAllNotes();
   }, [searchWord]);
 
   const _showNote = () => {
