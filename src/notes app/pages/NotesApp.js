@@ -2,17 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { deleteNote, getAllNotes, postNote } from '../api/notes';
 import { FilterMenu } from '../components/FilterMenu';
 import { Header } from '../components/Header';
+import Modal from '../components/Modal';
 import Loading from '../components/Loading';
 import { Body, Button, ColorBorder, Column, ColumnTitle, Data, Note, NoteTitle, Paragraph, RightSide } from '../components/noteComponents';
 
 import useGetNotes from '../hooks/useGetNotes';
-import useModal from '../hooks/useModal';
 
 export default function NotesApp() {
   const [searchWord, setSearchWord] = useState('');
+  const [isVisible, setIsVisible] = useState(false);
+  const [title, setTitle] = useState('');
+  const [body, setBody] = useState('');
 
-  const { show, DisplayModal, hide, title, body } = useModal();
   const { notes, isLoading, setNotes } = useGetNotes();
+
+  const show = () => setIsVisible(true);
+  const hide = () => setIsVisible(false);
 
   function getDate() {
     let today = new Date();
@@ -92,7 +97,17 @@ export default function NotesApp() {
       <Header text="Notes" onClick={show} value={searchWord} inputOnChange={(e) => setSearchWord(e.target.value)} />
       <Body>
         <FilterMenu />
-        <DisplayModal addNote={handleAddNote} modalHeaderText="Create new note" />
+        {isVisible && (
+          <Modal
+            addNote={handleAddNote}
+            modalHeaderText="Create new note"
+            title={title}
+            onChangeTitle={(e) => setTitle(e.target.value)}
+            body={body}
+            onChangeBody={(e) => setBody(e.target.value)}
+            closeModal={hide}
+          />
+        )}
         <RightSide>
           <Column>
             <ColumnTitle>To do</ColumnTitle>
