@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { deleteNote, getAllNotes, postNote } from '../api/notes';
-import { FilterMenu } from '../components/FilterMenu';
-import { Header } from '../components/Header';
-import Modal from '../components/Modal';
-import Loading from '../components/Loading';
-import { Body, Button, ColorBorder, Column, ColumnTitle, Data, Note, NoteTitle, Paragraph, RightSide } from '../components/noteComponents';
+import React, { useEffect, useState } from 'react';
 
 import useGetNotes from '../hooks/useGetNotes';
+
+import { Main } from '../../common/Main';
+import { FilterMenu } from '../components/filter menu/FilterMenu';
+import { Header } from '../components/header/Header';
+import Loading from '../components/loading/Loading';
+import Modal from '../components/modal/Modal';
+import { Body, Button, ColorBorder, Column, ColumnTitle, Data, Note, NoteTitle, Paragraph, RightSide } from '../components/note/noteComponents';
+
+import { deleteNote, getAllNotes, postNote } from '../api/notes';
 
 export default function NotesApp() {
   const [searchWord, setSearchWord] = useState('');
@@ -46,13 +49,14 @@ export default function NotesApp() {
   }
 
   useEffect(() => {
+    // do not fetch here. Add fetch funct to the notes api.
+
     async function showAllNotes() {
       let result = notes.filter((note) => note.title.toLowerCase().includes(searchWord.toLowerCase(), 0));
       setNotes(result);
-
       if (!searchWord) {
         const notes = await getAllNotes();
-        setNotes(notes);
+        setNotes(notes); // use notes array copie instead of fetching again
       }
     }
     showAllNotes();
@@ -93,7 +97,7 @@ export default function NotesApp() {
   };
 
   return (
-    <>
+    <Main>
       <Header text="Notes" onClick={show} value={searchWord} inputOnChange={(e) => setSearchWord(e.target.value)} />
       <Body>
         <FilterMenu />
@@ -121,6 +125,6 @@ export default function NotesApp() {
           </Column>
         </RightSide>
       </Body>
-    </>
+    </Main>
   );
 }

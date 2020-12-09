@@ -1,5 +1,34 @@
 import styled from '@emotion/styled';
 
+export const Note = styled.div`
+  padding: 15px 20px 15px 0;
+  margin: 10px;
+  text-align: left;
+  border-radius: 10px;
+  background: rgba(0.5, 0.5, 0.5, 0.5);
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 1px 1px 1px white;
+  }
+`;
+
+export const Button = styled.button`
+  padding: 8px 12px;
+  margin: 15px 5px 0 0;
+  color: ${(props) => props.theme.colors.primary};
+  border: 1px solid ${(props) => props.color};
+  background: none;
+  border-radius: 6px;
+  cursor: pointer;
+
+  &:hover {
+    background: #4c4c4c;
+    border: none;
+    color: ${(props) => props.color};
+  }
+`;
+
 export const Body = styled.div`
   color: #f6f6f6;
   height: 100vh;
@@ -24,18 +53,6 @@ export const Column = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   flex-flow: column;
-`;
-
-export const Note = styled.div`
-  padding: 15px 20px 15px 0;
-  margin: 10px;
-  border-radius: 10px;
-  background: rgba(0.5, 0.5, 0.5, 0.5);
-  cursor: pointer;
-
-  &:hover {
-    box-shadow: 1px 1px 1px white;
-  }
 `;
 
 export const Form = styled.div`
@@ -66,22 +83,6 @@ export const NoteBodyField = styled.input`
   height: 100px;
 `;
 
-export const Button = styled.button`
-  padding: 8px 12px;
-  margin: 15px 5px 0 0;
-  color: ${(props) => props.theme.colors.primary};
-  border: 1px solid ${(props) => props.color};
-  background: none;
-  border-radius: 6px;
-  cursor: pointer;
-
-  &:hover {
-    background: #4c4c4c;
-    border: none;
-    color: ${(props) => props.color};
-  }
-`;
-
 export const ColorBorder = styled.div`
   border-left: 4px solid ${(props) => props.color};
   padding-left: 20px;
@@ -93,7 +94,7 @@ export const ColorBorder = styled.div`
 export const NoteTitle = styled.p`
   margin: 0;
   padding: 0;
-  font-size: 25px;
+  font-size: 1.3rem;
 `;
 
 export const Data = styled.p`
@@ -110,7 +111,7 @@ export const Paragraph = styled.p`
 `;
 
 export const ColumnTitle = styled.h2`
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   margin-left: 10px;
   text-align: left;
   @media (max-width: 500px) {
