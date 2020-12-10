@@ -1,20 +1,22 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import { ModalButton, ModalFooter, ModalHeader, ModalWrapper, ModalInput } from './modalComponents';
+import React from 'react';
+
+import { ModalFooter, ModalHeader, ModalWrapper, Button } from './modalComponents';
+
 function Modal({ modalHeaderText, closeModal, addNote, title, body, onChangeTitle, onChangeBody }) {
   return (
     <ModalWrapper>
       <form onSubmit={addNote}>
         <ModalHeader>{modalHeaderText}</ModalHeader>
-        <ModalInput type="text" placeholder="title..." value={title} onChange={onChangeTitle} />
-        <ModalInput height="50px" type="text" placeholder="text..." value={body} onChange={onChangeBody} />
+        <input type="text" placeholder="title..." value={title} onChange={onChangeTitle} />
+        <input height="50px" type="text" placeholder="text..." value={body} onChange={onChangeBody} />
         <ModalFooter>
-          <ModalButton bgColor="#525252" color="white" onClick={closeModal}>
+          <Button bgColor="#525252" color="white" onClick={closeModal}>
             Close
-          </ModalButton>
-          <ModalButton type="submit" color="white" bgColor="#2196F3" brColor="#2196F3">
+          </Button>
+          <Button type="submit" color="white" bgColor="#2196F3" brColor="#2196F3">
             Create
-          </ModalButton>
+          </Button>
         </ModalFooter>
       </form>
     </ModalWrapper>
