@@ -5,7 +5,8 @@ export const Note = styled.div`
   margin: 10px;
   text-align: left;
   border-radius: 10px;
-  background: rgba(0.5, 0.5, 0.5, 0.5);
+  color: ${(props) => props.theme.colors.primary};
+  background: ${(props) => props.theme.colors.filterMenu};
   cursor: pointer;
 
   &:hover {
@@ -44,6 +45,7 @@ export const RightSide = styled.div`
   font-size: 0.8rem;
   grid-auto-flow: row;
   column-gap: 5%;
+  color: ${(props) => props.theme.colors.primary};
 `;
 
 export const Column = styled.div`
@@ -84,7 +86,7 @@ export const NoteBodyField = styled.input`
 `;
 
 export const ColorBorder = styled.div`
-  border-left: 4px solid ${(props) => props.color};
+  border-left: 4px solid ${(props) => props.theme.colors.notePrimary};
   padding-left: 20px;
   display: flex;
   flex-direction: column;

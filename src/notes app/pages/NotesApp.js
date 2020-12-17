@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 
 import useGetNotes from '../hooks/useGetNotes';
 
@@ -11,7 +12,7 @@ import { Body, Button, ColorBorder, Column, ColumnTitle, Data, Note, NoteTitle, 
 
 import { deleteNote, getAllNotes, postNote } from '../api/notes';
 
-export default function NotesApp() {
+export default function NotesApp({ switchTheme }) {
   const [searchWord, setSearchWord] = useState('');
   const [isVisible, setIsVisible] = useState(false);
   const [title, setTitle] = useState('');
@@ -98,7 +99,7 @@ export default function NotesApp() {
 
   return (
     <Main>
-      <Header text="Notes" onClick={show} value={searchWord} inputOnChange={(e) => setSearchWord(e.target.value)} />
+      <Header text="Notes" onClick={show} value={searchWord} inputOnChange={(e) => setSearchWord(e.target.value)} switchTheme={switchTheme} />
       <Body>
         <FilterMenu />
         {isVisible && (
@@ -128,3 +129,7 @@ export default function NotesApp() {
     </Main>
   );
 }
+
+NotesApp.propTypes = {
+  switchTheme: PropTypes.func
+};

@@ -10,6 +10,7 @@ ReactDOM.render(
       styles={css`
         body {
           margin: 0;
+          padding: 0;
           height: 100vh;
           font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI';
         }

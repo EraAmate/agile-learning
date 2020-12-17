@@ -8,7 +8,7 @@ export const Wrapper = styled.header`
   padding: 10px 30px;
   font-size: 1.5rem;
   color: ${(props) => props.theme.colors.primary};
-  background: rgba(0.5, 0.5, 0.5, 0.5);
+  background: ${(props) => props.theme.colors.filterMenu};
   align-items: center;
 
   img {
@@ -20,26 +20,27 @@ export const Wrapper = styled.header`
   p {
     padding: 0;
     margin: 0;
-    margin-right: 10%;
+    margin-right: 3%;
   }
 
   input {
     padding: 10px 10px 10px 35px;
     font-size: 1rem;
     border-radius: 8px;
+    border: none;
     outline: none;
     width: 100%;
+    opacity: 0.8;
   }
 
   div {
     position: absolute;
     display: flex;
     align-items: center;
-    width: 250px;
+    width: 350px;
     padding: 0 10px;
     right: 0;
-    margin-right: 90px;
-    opacity: 0.6;
+    margin-right: 25px;
   }
 `;
 
@@ -48,14 +49,14 @@ export const Search = styled(SearchIcon)`
   position: absolute;
   align-self: center;
   margin-left: 10px;
-  opacity: 0.6;
-  color: ${(props) => props.theme.colors.secondary};
+  color: #2d2d2d;
+  margin-right: 25px;
 `;
 
 export const AddBtn = styled(AddIcon)`
   background: ${(props) => props.theme.colors.btnSecondary};
   border-radius: 50%;
-  padding: 10px;
+  padding: 7px;
   cursor: pointer;
-  margin-left: auto;
+  right: 0;
 `;

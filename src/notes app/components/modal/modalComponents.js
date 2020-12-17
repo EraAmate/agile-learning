@@ -50,6 +50,7 @@ export const Button = styled.button`
   border: 1px solid ${(props) => props.brColor};
   background: ${(props) => props.bgColor};
 `;
+
 export const ModalHeader = styled.div`
   display: flex;
   align-items: flex-start;

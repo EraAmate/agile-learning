@@ -27,7 +27,7 @@ const Wrapper = styled.div`
   padding: 30px 10px;
   font-size: 1rem;
   color: ${(props) => props.theme.colors.primary};
-  background: rgba(0.5, 0.5, 0.5, 0.5);
+  background: ${(props) => props.theme.colors.filterMenu};
 
   ul {
     list-style: none;
@@ -43,7 +43,7 @@ const Wrapper = styled.div`
     &:after {
       display: block;
       content: '';
-      border-bottom: 3px solid ${(props) => props.theme.colors.btnSecondary};
+      border-bottom: 3px solid ${(props) => props.theme.colors.dividingLine};
       transform: scaleX(0);
       transition: transform 250ms ease-in-out;
       transform-origin: 0% 50%;
