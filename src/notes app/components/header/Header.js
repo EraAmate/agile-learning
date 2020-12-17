@@ -6,7 +6,7 @@ import Logo from '../../../common/assets/Logo.svg';
 import { AddBtn, Search, Wrapper } from './headerComponents';
 import Toogle from '../toogle button/Toogle';
 
-export function Header({ onClick, text, inputOnChange, value, toggleTheme }) {
+export function Header({ onClick, text, inputOnChange, value, switchTheme }) {
   return (
     <Wrapper>
       <img src={Logo} />
@@ -14,7 +14,7 @@ export function Header({ onClick, text, inputOnChange, value, toggleTheme }) {
       <div>
         <input type="text" placeholder="Search here for notes..." onChange={inputOnChange} value={value} />
         <Search />
-        <Toogle switchTheme={toggleTheme} />
+        <Toogle switchTheme={switchTheme} />
         <Tooltip title="Create new note" aria-label="add">
           <AddBtn onClick={onClick} />
         </Tooltip>
@@ -28,5 +28,5 @@ Header.propTypes = {
   onClick: PropTypes.func,
   inputOnChange: PropTypes.func,
   value: PropTypes.string,
-  toggleTheme: PropTypes.func
+  switchTheme: PropTypes.func
 };

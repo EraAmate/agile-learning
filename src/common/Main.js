@@ -6,4 +6,6 @@ export const Main = styled.div`
   text-align: center;
   background-image: url(${(props) => props.theme.background});
   height: 100vh;
+  width: auto;
+  background-size: cover;
 `;
