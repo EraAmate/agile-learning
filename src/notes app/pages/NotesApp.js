@@ -8,7 +8,8 @@ import { FilterMenu } from '../components/filter menu/FilterMenu';
 import { Header } from '../components/header/Header';
 import Loading from '../components/loading/Loading';
 import Modal from '../components/modal/Modal';
-import { Body, Button, ColorBorder, Column, ColumnTitle, Data, Note, NoteTitle, Paragraph, RightSide } from '../components/note/noteComponents';
+import { Body, ColorBorder, Column, ColumnTitle, Data, Note, NoteTitle, Paragraph, RightSide } from '../components/note/noteComponents';
+import { ButtonsNav } from '../components/buttons nav/ButtonsNav';
 
 import { deleteNote, getAllNotes, postNote } from '../api/notes';
 
@@ -78,14 +79,7 @@ export default function NotesApp({ switchTheme }) {
                   <NoteTitle>{note.title}</NoteTitle>
                   <Data>{note.date}</Data>
                   <Paragraph>{note.body}</Paragraph>
-                  <div>
-                    <Button background="#2196F3" color="#2196F3">
-                      Edit
-                    </Button>
-                    <Button background="#D06778" color="#DD302F" onClick={() => handleDelete(note.id)}>
-                      Remove
-                    </Button>
-                  </div>
+                  <ButtonsNav handleDelete={() => handleDelete(note.id)} />
                 </ColorBorder>
               </Note>
             );
