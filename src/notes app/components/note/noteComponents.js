@@ -14,22 +14,6 @@ export const Note = styled.div`
   }
 `;
 
-export const Button = styled.button`
-  padding: 8px 12px;
-  margin: 15px 5px 0 0;
-  color: ${(props) => props.theme.colors.primary};
-  border: 1px solid ${(props) => props.color};
-  background: none;
-  border-radius: 6px;
-  cursor: pointer;
-
-  &:hover {
-    background: #4c4c4c;
-    border: none;
-    color: ${(props) => props.color};
-  }
-`;
-
 export const Body = styled.div`
   color: #f6f6f6;
   display: grid;
