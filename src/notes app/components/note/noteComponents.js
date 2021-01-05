@@ -32,8 +32,8 @@ export const Button = styled.button`
 
 export const Body = styled.div`
   color: #f6f6f6;
-  height: 100vh;
   display: grid;
+  padding-right: 40px;
   grid-template-columns: 20% 80%;
 `;
 
