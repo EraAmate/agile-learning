@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import useGetNotes from '../hooks/useGetNotes';
 
@@ -70,29 +71,41 @@ export default function NotesApp({ switchTheme }) {
 
     return (
       <>
-        {notes ? (
-          notes.map((note, i) => {
-            return (
-              <Note key={i}>
-                <ColorBorder color="yellow">
-                  <NoteTitle>{note.title}</NoteTitle>
-                  <Data>{note.date}</Data>
-                  <Paragraph>{note.body}</Paragraph>
-                  <div>
-                    <Button background="#2196F3" color="#2196F3">
-                      Edit
-                    </Button>
-                    <Button background="#D06778" color="#DD302F" onClick={() => handleDelete(note.id)}>
-                      Remove
-                    </Button>
-                  </div>
-                </ColorBorder>
-              </Note>
-            );
-          })
-        ) : (
-          <div>Got Nothing</div>
-        )}
+        <DragDropContext>
+          <Droppable droppableId="notes">
+            {(provided) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                {notes ? (
+                  notes.map((note, i) => {
+                    return (
+                      <Draggable key={note.id} draggableId={note.id} index={i}>
+                        {(provided) => (
+                          <Note {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                            <ColorBorder color="yellow">
+                              <NoteTitle>{note.title}</NoteTitle>
+                              <Data>{note.date}</Data>
+                              <Paragraph>{note.body}</Paragraph>
+                              <div>
+                                <Button background="#2196F3" color="#2196F3">
+                                  Edit
+                                </Button>
+                                <Button background="#D06778" color="#DD302F" onClick={() => handleDelete(note.id)}>
+                                  Remove
+                                </Button>
+                              </div>
+                            </ColorBorder>
+                          </Note>
+                        )}
+                      </Draggable>
+                    );
+                  })
+                ) : (
+                  <div>Got Nothing</div>
+                )}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </>
     );
   };
