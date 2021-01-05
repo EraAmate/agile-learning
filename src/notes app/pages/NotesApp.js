@@ -20,6 +20,7 @@ export default function NotesApp({ switchTheme }) {
   const [body, setBody] = useState('');
 
   const { notes, isLoading, setNotes } = useGetNotes();
+  const [staticNotes, updateNotes] = useState(notes);
 
   const show = () => setIsVisible(true);
   const hide = () => setIsVisible(false);
@@ -52,7 +53,6 @@ export default function NotesApp({ switchTheme }) {
 
   useEffect(() => {
     // do not fetch here. Add fetch funct to the notes api.
-
     async function showAllNotes() {
       let result = notes.filter((note) => note.title.toLowerCase().includes(searchWord.toLowerCase(), 0));
       setNotes(result);
@@ -69,27 +69,37 @@ export default function NotesApp({ switchTheme }) {
       return <Loading />;
     }
 
+    function handleOnDragEnd(result) {
+      console.log(result);
+      if (!result.destination) return;
+
+      const items = Array.from(staticNotes);
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, reorderedItem);
+      updateNotes(items);
+    }
+
     return (
       <>
-        <DragDropContext>
-          <Droppable droppableId="notes">
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="s">
             {(provided) => (
               <div {...provided.droppableProps} ref={provided.innerRef}>
                 {notes ? (
-                  notes.map((note, i) => {
+                  notes.map(({ id, title, date, body }, i) => {
                     return (
-                      <Draggable key={note.id} draggableId={note.id} index={i}>
+                      <Draggable key={id} draggableId={id} index={i}>
                         {(provided) => (
                           <Note {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
                             <ColorBorder color="yellow">
-                              <NoteTitle>{note.title}</NoteTitle>
-                              <Data>{note.date}</Data>
-                              <Paragraph>{note.body}</Paragraph>
+                              <NoteTitle>{title}</NoteTitle>
+                              <Data>{date}</Data>
+                              <Paragraph>{body}</Paragraph>
                               <div>
                                 <Button background="#2196F3" color="#2196F3">
                                   Edit
                                 </Button>
-                                <Button background="#D06778" color="#DD302F" onClick={() => handleDelete(note.id)}>
+                                <Button background="#D06778" color="#DD302F" onClick={() => handleDelete(id)}>
                                   Remove
                                 </Button>
                               </div>
@@ -102,6 +112,7 @@ export default function NotesApp({ switchTheme }) {
                 ) : (
                   <div>Got Nothing</div>
                 )}
+                {provided.placeholder}
               </div>
             )}
           </Droppable>
