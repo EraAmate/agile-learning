@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 import useGetNotes from '../hooks/useGetNotes';
 
@@ -20,6 +21,7 @@ export default function NotesApp({ switchTheme }) {
   const [body, setBody] = useState('');
 
   const { notes, isLoading, setNotes } = useGetNotes();
+  const [staticNotes, updateNotes] = useState(notes);
 
   const show = () => setIsVisible(true);
   const hide = () => setIsVisible(false);
@@ -52,7 +54,6 @@ export default function NotesApp({ switchTheme }) {
 
   useEffect(() => {
     // do not fetch here. Add fetch funct to the notes api.
-
     async function showAllNotes() {
       let result = notes.filter((note) => note.title.toLowerCase().includes(searchWord.toLowerCase(), 0));
       setNotes(result);
@@ -69,24 +70,47 @@ export default function NotesApp({ switchTheme }) {
       return <Loading />;
     }
 
+    function handleOnDragEnd(result) {
+      console.log(result);
+      if (!result.destination) return;
+
+      const items = Array.from(staticNotes);
+      const [reorderedItem] = items.splice(result.source.index, 1);
+      items.splice(result.destination.index, 0, reorderedItem);
+      updateNotes(items);
+    }
+
     return (
       <>
-        {notes ? (
-          notes.map((note, i) => {
-            return (
-              <Note key={i}>
-                <ColorBorder color="yellow">
-                  <NoteTitle>{note.title}</NoteTitle>
-                  <Data>{note.date}</Data>
-                  <Paragraph>{note.body}</Paragraph>
-                  <ButtonsNav handleDelete={() => handleDelete(note.id)} />
-                </ColorBorder>
-              </Note>
-            );
-          })
-        ) : (
-          <div>Got Nothing</div>
-        )}
+        <DragDropContext onDragEnd={handleOnDragEnd}>
+          <Droppable droppableId="s">
+            {(provided) => (
+              <div {...provided.droppableProps} ref={provided.innerRef}>
+                {notes ? (
+                  notes.map(({ id, title, date, body }, i) => {
+                    return (
+                      <Draggable key={id} draggableId={id} index={i}>
+                        {(provided) => (
+                          <Note {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+                            <ColorBorder color="yellow">
+                              <NoteTitle>{title}</NoteTitle>
+                              <Data>{date}</Data>
+                              <Paragraph>{body}</Paragraph>
+                              <ButtonsNav handleDelete={() => handleDelete(id)} />
+                            </ColorBorder>
+                          </Note>
+                        )}
+                      </Draggable>
+                    );
+                  })
+                ) : (
+                  <div>Got Nothing</div>
+                )}
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
+        </DragDropContext>
       </>
     );
   };
