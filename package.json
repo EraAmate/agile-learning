@@ -25,7 +25,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^1.2.1"
+    "semantic-ui-react": "^1.2.1",
+    "serve": "^11.3.2"
   },
   "scripts": {
     "dev": "concurrently --kill-others-on-fail \"npm run build\" \"npm start\" \"npm run api \"",
